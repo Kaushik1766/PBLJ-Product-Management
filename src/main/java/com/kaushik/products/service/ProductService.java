@@ -23,7 +23,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void addProduct() {
+    public void addProduct() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product name");
         String name = sc.nextLine();
@@ -36,25 +36,17 @@ public class ProductService {
         String description = sc.nextLine();
         sc.close();
         Product product = new Product(name, description, price, quantity);
-        try {
-            productRepository.save(product);
-        } catch (Exception e) {
-            System.out.println("error while saving product");
+        productRepository.save(product);
+    }
+
+    public void listProducts() throws Exception {
+        List<Product> products = productRepository.findAll();
+        for (Product pr : products) {
+            System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity());
         }
     }
 
-    public void listProducts() {
-        try {
-            List<Product> products = productRepository.findAll();
-            for (Product pr : products) {
-                System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity());
-            }
-        } catch (Exception e) {
-            System.out.println("error while fetching products");
-        }
-    }
-
-    public void updateProduct() {
+    public void updateProduct() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product id");
         String id = sc.nextLine();
@@ -70,51 +62,35 @@ public class ProductService {
         sc.close();
         Product product = new Product(name, description, price, quantity);
         product.setId(id);
-        try {
-            productRepository.save(product);
-        } catch (Exception e) {
-            System.out.println("error while updating product");
-        }
+        productRepository.save(product);
     }
 
-    public void deleteProduct() {
+    public void deleteProduct() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product id");
         String id = sc.nextLine();
         sc.close();
-        try {
-            productRepository.deleteById(id);
-        } catch (Exception e) {
-            System.out.println("error while deleting product");
-        }
+        productRepository.deleteById(id);
     }
 
-    public void getProductById() {
+    public void getProductById() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product id");
         String id = sc.nextLine();
         sc.close();
-        try {
-            Product product = productRepository.findById(id).orElseThrow();
-            System.out.println(product.getId() + " " + product.getName() + " " + product.getPrice() + " "
-                    + product.getQuantity());
-        } catch (Exception e) {
-            System.out.println("error while fetching product");
-        }
+        Product product = productRepository.findById(id).orElseThrow();
+        System.out.println(
+                product.getId() + " " + product.getName() + " " + product.getPrice() + " " + product.getQuantity());
     }
 
-    public void getProductByName() {
+    public void getProductByName() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter product name");
         String name = sc.nextLine();
         sc.close();
-        try {
-            List<Product> products = productRepository.findByName(name);
-            for (Product pr : products) {
-                System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity());
-            }
-        } catch (Exception e) {
-            System.out.println("error while fetching product");
+        List<Product> products = productRepository.findByName(name);
+        for (Product pr : products) {
+            System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity());
         }
     }
 }

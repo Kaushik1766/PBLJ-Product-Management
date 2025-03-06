@@ -25,7 +25,7 @@ public class PurchaseOrder {
     private String id;
     private String orderDate;
 
-    @ManyToOne(targetEntity = Supplier.class)
+    @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 

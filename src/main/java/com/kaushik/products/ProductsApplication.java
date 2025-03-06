@@ -27,40 +27,45 @@ public class ProductsApplication {
 
 	public void crud() {
 		Scanner sc = new Scanner(System.in);
-		while (true) {
-			System.out.println("1. add product");
-			System.out.println("2. delete product");
-			System.out.println("3. list products");
-			System.out.println("4. get product by id");
-			System.out.println("5. update product");
-			System.out.println("6. get product by name");
-			System.out.println("7. exit");
+		try {
+			while (true) {
+				System.out.println("1. add product");
+				System.out.println("2. delete product");
+				System.out.println("3. list products");
+				System.out.println("4. get product by id");
+				System.out.println("5. update product");
+				System.out.println("6. get product by name");
+				System.out.println("7. exit");
 
-			int choice = sc.nextInt();
-			switch (choice) {
-				case 1:
-					productService.addProduct();
-					break;
-				case 2:
-					productService.deleteProduct();
-					break;
-				case 3:
-					productService.listProducts();
-					break;
-				case 4:
-					productService.getProductById();
-					break;
-				case 5:
-					productService.updateProduct();
-					break;
-				case 6:
-					productService.getProductByName();
-					break;
-				default:
-					System.out.println("exiting");
-					break;
+				int choice = sc.nextInt();
+				switch (choice) {
+					case 1:
+						productService.addProduct();
+						break;
+					case 2:
+						productService.deleteProduct();
+						break;
+					case 3:
+						productService.listProducts();
+						break;
+					case 4:
+						productService.getProductById();
+						break;
+					case 5:
+						productService.updateProduct();
+						break;
+					case 6:
+						productService.getProductByName();
+						break;
+					default:
+						break;
+				}
+				sc.nextLine();
 			}
-			sc.nextLine();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			sc.close();
 		}
 	}
 
