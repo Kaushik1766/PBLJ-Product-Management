@@ -4,15 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kaushik.products.models.Product;
-import com.kaushik.products.repository.CategoryRepository;
-import com.kaushik.products.repository.OrderItemRepository;
 import com.kaushik.products.repository.ProductRepository;
-import com.kaushik.products.repository.PurchaseOrderRepository;
-import com.kaushik.products.repository.SupplierRepository;
 
 @Service
 public class ProductService {
@@ -42,7 +37,8 @@ public class ProductService {
     public void listProducts() throws Exception {
         List<Product> products = productRepository.findAll();
         for (Product pr : products) {
-            System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity());
+            System.out.println(pr.getId() + " " + pr.getName() + " " + pr.getPrice() + " " + pr.getQuantity() + " "
+                    + pr.getDescription());
         }
     }
 

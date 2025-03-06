@@ -58,7 +58,7 @@ public class ProductsApplication {
 						productService.getProductByName();
 						break;
 					default:
-						break;
+						throw new Exception("exit");
 				}
 				sc.nextLine();
 			}
